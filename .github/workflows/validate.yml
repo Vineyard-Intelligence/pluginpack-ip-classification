@@ -1,0 +1,61 @@
+name: validate
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Unit tests
+        run: node --test test/pack.test.mjs
+
+      - name: Manifest matches the bundle (regenerate and diff)
+        run: |
+          node scripts/gen-manifest.mjs
+          git diff --exit-code plugins/ || {
+            echo "::error::plugins/*.manifest.json is stale — run 'npm run build' and commit the result"
+            exit 1
+          }
+
+      - name: Manifest schema
+        run: |
+          node - <<'JS'
+          const fs = require("node:fs");
+          const doc = JSON.parse(fs.readFileSync("plugins/ip-classification.manifest.json", "utf8"));
+          const required = ["identifier", "content_type", "name", "version", "description", "platforms"];
+          const missing = required.filter((k) => !doc[k]);
+          if (missing.length) throw new Error(`pack manifest missing ${missing}`);
+          if (doc.content_type !== "vineyard:pluginpack") throw new Error("pack content_type must be vineyard:pluginpack");
+          if (!doc.platforms?.web?.entry) throw new Error("pack needs platforms.web.entry");
+          // registry schema limits: name 128, description 1024
+          if (doc.name.length > 128) throw new Error("pack name exceeds 128 chars");
+          if (doc.description.length > 1024) throw new Error("pack description exceeds 1024 chars");
+          const ids = new Set();
+          for (const p of doc.plugins ?? []) {
+            if (p.content_type !== "vineyard:plugin") throw new Error(`${p.identifier}: content_type must be vineyard:plugin`);
+            if (!p.identifier?.startsWith("run.vineyard.plugins.")) throw new Error(`${p.identifier}: bad namespace`);
+            if (ids.has(p.identifier)) throw new Error(`${p.identifier}: duplicate`);
+            ids.add(p.identifier);
+            if (!p.io || !p.scopes || !p.lifecycle) throw new Error(`${p.identifier}: needs io, scopes and lifecycle`);
+            if (p.name.length > 128) throw new Error(`${p.identifier}: name exceeds 128 chars`);
+            if (p.description.length > 1024) throw new Error(`${p.identifier}: description exceeds 1024 chars`);
+          }
+          console.log(`manifest ok — ${doc.plugins.length} plugins`);
+          JS
+
+      - name: Bundle size budget
+        run: |
+          bytes=$(wc -c < dist/pack.mjs)
+          echo "dist/pack.mjs = $bytes bytes"
+          if [ "$bytes" -gt 400000 ]; then
+            echo "::error::bundle exceeds the 400 KB budget — trim a bucket before merging"
+            exit 1
+          fi

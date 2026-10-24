@@ -1,0 +1,82 @@
+{
+  "identifier": "run.vineyard.pluginpacks.ip_classification",
+  "content_type": "vineyard:pluginpack",
+  "name": "IP Classification (under test)",
+  "version": "1.2.0",
+  "description": "Classifies IP addresses as scanners, C2 and malware families, crawlers, anonymizers and non-routable space.",
+  "author": {
+    "name": "VINEYARD",
+    "url": "https://github.com/Vineyard-Intelligence"
+  },
+  "license": "Apache-2.0",
+  "icon": "fingerprint",
+  "platforms": {
+    "primary": "web",
+    "web": {
+      "runtime": "sandbox-js",
+      "entry": "dist/pack.mjs"
+    }
+  },
+  "plugins": [
+    {
+      "identifier": "run.vineyard.plugins.ip_classification",
+      "content_type": "vineyard:plugin",
+      "name": "IP Classification",
+      "version": "1.2.0",
+      "description": "Classifies an IPv4 address by role: internet-wide scanner, C2 or malware family (creating a linked Tool or Malware node), crawler or AI bot, anonymizer (VPN, Tor exit, iCloud Private Relay), or non-routable space. Type an address into the form or select IP Address nodes. No API key.",
+      "icon": "fingerprint",
+      "io": {
+        "consumes": [
+          {
+            "typepack": "run.vineyard.typepacks.infrastructure",
+            "category": "infrastructure",
+            "name": "ip_address"
+          }
+        ],
+        "produces": [
+          {
+            "typepack": "run.vineyard.typepacks.threat",
+            "category": "threat",
+            "name": "tool"
+          },
+          {
+            "typepack": "run.vineyard.typepacks.threat",
+            "category": "threat",
+            "name": "malware"
+          }
+        ]
+      },
+      "scopes": {
+        "graph": [
+          "node:read",
+          "node:update",
+          "node:create",
+          "edge:create"
+        ],
+        "network": [
+          {
+            "endpoint": "https://raw.githubusercontent.com/Vineyard-Intelligence/ip-observation-history/main",
+            "methods": [
+              "GET"
+            ],
+            "purpose": "observation index and /8 shards"
+          }
+        ]
+      },
+      "platforms": {
+        "primary": "web",
+        "web": {
+          "runtime": "sandbox-js",
+          "entry": "dist/pack.mjs"
+        }
+      },
+      "lifecycle": {
+        "persistence": "ephemeral",
+        "controls": [
+          "progress",
+          "cancel"
+        ]
+      }
+    }
+  ]
+}

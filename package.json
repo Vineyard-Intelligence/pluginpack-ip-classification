@@ -1,0 +1,19 @@
+{
+  "name": "pluginpack-ip-classification",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vineyard plugin pack: classify IP addresses as scanners, C2 families, crawlers, anonymizers or non-routable space.",
+  "type": "module",
+  "scripts": {
+    "update-data": "node scripts/fetch-data.mjs",
+    "build": "node scripts/build.mjs && node scripts/gen-manifest.mjs",
+    "test": "node --test test/pack.test.mjs",
+    "serve": "node scripts/serve.mjs 8787",
+    "measure-fetch": "node scripts/measure-runtime-fetch.mjs",
+    "churn": "node scripts/churn.mjs",
+    "sources": "node scripts/inventory.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
