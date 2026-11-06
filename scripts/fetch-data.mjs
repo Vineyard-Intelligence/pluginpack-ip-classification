@@ -2,9 +2,12 @@
 //
 //   node scripts/fetch-data.mjs
 //
-// Writes data/generated.json. Every bucket keeps three parallel arrays — names, ranges and meta — so
-// scripts/build.mjs can split each source into "ships in the bundle" or "fetched at runtime".
+// Writes data/generated.json. Every bucket keeps three parallel arrays — names, ranges and meta.
 // Source URLs and the remote/bundled decision live in scripts/sources.mjs.
+//
+// Also writes src/dataset.json, the one part build.mjs embeds in the bundle. Address ranges are not
+// embedded — the plugin reads them from the observation index. Only the family metadata ships,
+// because a C2 tag alone does not say whether it is a tool or a malware family.
 import { writeFileSync, mkdirSync, unlinkSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -14,6 +17,7 @@ import { sources, ovpnRemotes } from "./sources.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const OUT = `${HERE}/../data/generated.json`;
+const DATASET = `${HERE}/../src/dataset.json`;
 const BUCKETS = ["scanners", "c2", "bots", "anonymizer", "bogon"];
 
 async function get(url, tries = 4) {
@@ -201,6 +205,10 @@ async function main() {
   for (const k of BUCKETS) out[k].ranges.sort((a, b) => a[0] - b[0]);
   mkdirSync(dirname(OUT), { recursive: true });
   writeFileSync(OUT, JSON.stringify(out));
+  writeFileSync(
+    DATASET,
+    JSON.stringify({ generated_at: out.generated_at, c2Families: out.c2.families }, null, 2) + "\n",
+  );
   const total = BUCKETS.reduce((n, k) => n + out[k].ranges.length, 0);
   const remote = BUCKETS.reduce((n, k) => n + out[k].meta.filter((m) => m.remote).length, 0);
   console.log(

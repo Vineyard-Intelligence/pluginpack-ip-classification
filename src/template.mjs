@@ -553,7 +553,7 @@ export default definePluginPack({
   identifier: "run.vineyard.pluginpacks.ip_classification",
   content_type: "vineyard:pluginpack",
   name: "IP Classification (under test)",
-  version: "1.2.0",
+  version: "1.2.1",
   description:
     "Classifies IP addresses as scanners, C2 and malware families, crawlers, anonymizers and non-routable space.",
   author: { name: "VINEYARD", url: "https://github.com/Vineyard-Intelligence" },

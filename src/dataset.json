@@ -1,0 +1,221 @@
+{
+  "generated_at": "2026-10-24",
+  "c2Families": [
+    {
+      "name": "Cobalt Strike",
+      "label": "cobalt_strike",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "Sliver",
+      "label": "sliver",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "Metasploit",
+      "label": "metasploit",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "Mythic",
+      "label": "mythic",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "Havoc",
+      "label": "havoc",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "Brute Ratel C4",
+      "label": "brute_ratel_c4",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "Covenant",
+      "label": "covenant",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "Empire",
+      "label": "empire",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "Posh",
+      "label": "posh",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "Caldera",
+      "label": "caldera",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "Deimos",
+      "label": "deimos",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "NimPlant",
+      "label": "nimplant",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "Viper",
+      "label": "viper",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "Villain",
+      "label": "villain",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "Supershell",
+      "label": "supershell",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "RedGuard",
+      "label": "redguard",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "PANDA",
+      "label": "panda",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "Hak5 Cloud C2",
+      "label": "hak5_cloud_c2",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "Unam Web Panel",
+      "label": "unam_web_panel",
+      "kind": "tool",
+      "type": "c2"
+    },
+    {
+      "name": "Sectop",
+      "label": "sectop",
+      "kind": "malware",
+      "type": "rat"
+    },
+    {
+      "name": "Quasar",
+      "label": "quasar",
+      "kind": "malware",
+      "type": "rat"
+    },
+    {
+      "name": "Remcos",
+      "label": "remcos",
+      "kind": "malware",
+      "type": "rat"
+    },
+    {
+      "name": "njRAT",
+      "label": "njrat",
+      "kind": "malware",
+      "type": "rat"
+    },
+    {
+      "name": "NanoCore",
+      "label": "nanocore",
+      "kind": "malware",
+      "type": "rat"
+    },
+    {
+      "name": "DcRAT",
+      "label": "dcrat",
+      "kind": "malware",
+      "type": "rat"
+    },
+    {
+      "name": "AsyncRAT",
+      "label": "asyncrat",
+      "kind": "malware",
+      "type": "rat"
+    },
+    {
+      "name": "Gh0st",
+      "label": "gh0st",
+      "kind": "malware",
+      "type": "rat"
+    },
+    {
+      "name": "XtremeRAT",
+      "label": "xtremerat",
+      "kind": "malware",
+      "type": "rat"
+    },
+    {
+      "name": "DarkComet",
+      "label": "darkcomet",
+      "kind": "malware",
+      "type": "rat"
+    },
+    {
+      "name": "NetBus",
+      "label": "netbus",
+      "kind": "malware",
+      "type": "rat"
+    },
+    {
+      "name": "Hookbot",
+      "label": "hookbot",
+      "kind": "malware",
+      "type": "rat"
+    },
+    {
+      "name": "ShadowPad",
+      "label": "shadowpad",
+      "kind": "malware",
+      "type": "backdoor"
+    },
+    {
+      "name": "GoPhish",
+      "label": "gophish",
+      "kind": "tool",
+      "type": "utility"
+    },
+    {
+      "name": "XMRig",
+      "label": "xmrig",
+      "kind": "tool",
+      "type": "utility"
+    },
+    {
+      "name": "BurpSuite",
+      "label": "burpsuite",
+      "kind": "tool",
+      "type": "utility"
+    },
+    {
+      "name": "MobSF",
+      "label": "mobsf",
+      "kind": "tool",
+      "type": "recon"
+    }
+  ]
+}

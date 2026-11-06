@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "update-data": "node scripts/fetch-data.mjs",
-    "build": "node scripts/build.mjs && node scripts/gen-manifest.mjs",
+    "build": "node build.mjs && node scripts/gen-manifest.mjs",
     "test": "node --test test/pack.test.mjs",
     "serve": "node scripts/serve.mjs 8787",
     "measure-fetch": "node scripts/measure-runtime-fetch.mjs",
