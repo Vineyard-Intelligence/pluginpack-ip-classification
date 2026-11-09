@@ -386,6 +386,11 @@ test("the catalog manifest matches the bundle", async () => {
   assert.equal(manifest.plugins[0].name, plugin.manifest.name);
   assert.ok(manifest.plugins[0].description.length <= 1024);
   assert.ok(manifest.plugins[0].name.length <= 128);
-  assert.ok(manifest.description.length <= 1024);
+  // The pack carries a card line (`summary`, <=250) and a page (`description`, Markdown, <=16,000);
+  // the 1024 cap is a member plugin's. JS string length counts UTF-16 units, as the registry does.
+  assert.equal(manifest.summary, pack.summary);
+  assert.equal(manifest.description, pack.description);
+  assert.ok(manifest.summary.length > 0 && manifest.summary.length <= 250);
+  assert.ok(manifest.description.trim().length > 0 && manifest.description.length <= 16000);
   assert.ok(BASE.includes("ip-observation-history"));
 });

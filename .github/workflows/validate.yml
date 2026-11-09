@@ -30,14 +30,16 @@ jobs:
           node - <<'JS'
           const fs = require("node:fs");
           const doc = JSON.parse(fs.readFileSync("plugins/ip-classification.manifest.json", "utf8"));
-          const required = ["identifier", "content_type", "name", "version", "description", "platforms"];
+          const required = ["identifier", "content_type", "name", "version", "summary", "description", "platforms"];
           const missing = required.filter((k) => !doc[k]);
           if (missing.length) throw new Error(`pack manifest missing ${missing}`);
           if (doc.content_type !== "vineyard:pluginpack") throw new Error("pack content_type must be vineyard:pluginpack");
           if (!doc.platforms?.web?.entry) throw new Error("pack needs platforms.web.entry");
-          // registry schema limits: name 128, description 1024
+          // registry schema limits: pack name 128, summary 250, description (the pack's page) 16,000;
+          // a member plugin's name 128 and description 1024
           if (doc.name.length > 128) throw new Error("pack name exceeds 128 chars");
-          if (doc.description.length > 1024) throw new Error("pack description exceeds 1024 chars");
+          if (doc.summary.length > 250) throw new Error("pack summary exceeds 250 chars");
+          if (doc.description.length > 16000) throw new Error("pack description exceeds 16000 chars");
           const ids = new Set();
           for (const p of doc.plugins ?? []) {
             if (p.content_type !== "vineyard:plugin") throw new Error(`${p.identifier}: content_type must be vineyard:plugin`);
