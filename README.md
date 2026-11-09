@@ -32,10 +32,10 @@ addresses, so those values carry `_entry`. A C2 hit creates a Tool or Malware no
 ```bash
 npm run update-data   # refresh the source metadata the bundle embeds
 npm run build         # bundle + manifest
-npm run test          # 19 tests
+npm run test          # 25 tests
 npm run sources       # refresh the source table in ip-observation-history
 npm run serve         # dev server on 8787
 ```
 
-The bundle is 19 KiB — source lists are not embedded, only the C2 family metadata. A run reads
+The bundle is about 30 KiB — source lists are not embedded, only the C2 family metadata. A run reads
 `index.json` (12 KiB, once) plus one shard per distinct /8 (about 2 KiB). **IPv4 only.**

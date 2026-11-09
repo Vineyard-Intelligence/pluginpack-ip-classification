@@ -463,7 +463,7 @@ const lookupPlugin = definePlugin({
     name: "IP Classification",
     version: "1.2.0",
     description:
-      "Classifies an IPv4 address by role: internet-wide scanner, C2 or malware family (creating a linked Tool or Malware node), crawler or AI bot, anonymizer (VPN, Tor exit, iCloud Private Relay), or non-routable space. Type an address into the form or select IP Address nodes. No API key.",
+      "Classifies an IPv4 address by role: internet-wide scanner, C2 or malware family (creating a linked Tool or Malware node), crawler or AI bot, anonymizer (VPN, Tor exit, iCloud Private Relay), or non-routable space. Runs on the selected IP Address nodes. No API key.",
     icon: "fingerprint",
     io: {
       // A declared seed type is what tells the run dialog this plugin operates on a selection:
@@ -613,7 +613,7 @@ export default definePluginPack({
   identifier: "run.vineyard.pluginpacks.ip_classification",
   content_type: "vineyard:pluginpack",
   name: "IP Classification (under test)",
-  version: "1.3.0",
+  version: "1.3.1",
   summary:
     "Classifies IP addresses as scanners, C2 and malware families, crawlers, anonymizers and non-routable space.",
   description: PACK_PAGE,
